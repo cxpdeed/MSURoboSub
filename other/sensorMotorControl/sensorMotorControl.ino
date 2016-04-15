@@ -46,14 +46,14 @@ void setup() {
 
 //Check motor connection, return false if any motors fail
 boolean getMotorStatus(){
-  boolean stat = true, fail = false;
+  boolean stat = true, all_thruster_connection = false;
   for(int i = 0; i < numMotors; i++){
     stat = motors[i].isAlive();
     if(stat = false)
-      fail = false;
+      all_thruster_connection = false;
     motorCon[i] = stat;
   }
-  return fail;
+  return all_thruster_connection;
 }
 
 void getMotorRPM(){
@@ -126,4 +126,15 @@ void loop() {
 
   motorUpdate();
   delay(250); // Update at roughly 4 hz for the demo
+  
+  switch (signal)
+  {
+   1       : Serial.println("move forward");break;//move forward
+   2       : Serial.println("move backward");break;//move backrward
+   3       : Serial.println("move left");break;//move left
+   4       : Serial.println("move right");break;//move right
+   5       : Serial.println("move up");break;//move up
+   6       : Serial.println("move down");break;//move down
+   defualt : break;
+  }
 }
